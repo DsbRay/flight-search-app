@@ -1,44 +1,47 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Details from "./Details";
+import PersonalDetails from "./PersonalDetails";
 import { FLIGHT_DATA } from "../../data";
+
 const FlightDetail = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { passangers } = location.state;
   const { id } = useParams();
   const flightData = FLIGHT_DATA.find(
     (flight) => flight.id.toString() === id.toString()
   );
-  const {
-    from,
-    to,
-    departureTime,
-    arrivalTime,
-    departureDate,
-    seatsAvailable,
-  } = flightData;
+  const handleFormSubmit = (personalData) => {
+    navigate("/flight-ticket", {
+      state: { flightData: flightData, personalData: personalData },
+    });
+  };
   return (
-    <div>
-      <div className="detail">
-        <p className="label">Leaving Destination:</p>
-        <p>{from}</p>
+    <Container>
+      <div>
+        <h1>Flight Details</h1>
+        <Details flight={flightData} />
       </div>
-      <div className="detail">
-        <p className="label">Arrival Destination</p>
-        <p>{to}</p>
+      <div>
+        <h1>Personal Details</h1>
+        <PersonalDetails
+          handleFormSubmit={handleFormSubmit}
+          seats={passangers}
+          seatsAvailable={flightData.seatsAvailable}
+        />
       </div>
-      <div className="detail">
-        <p className="label">Travel Time</p>
-        <p>
-          {departureTime} - {arrivalTime}
-        </p>
-      </div>
-      <div className="detail">
-        <p className="label">Departure Date</p>
-        <p>{departureDate}</p>
-      </div>
-      <div className="detail">
-        <p className="label">Seats Available</p>
-        <p>{seatsAvailable}</p>
-      </div>
-    </div>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr;
+  padding: 20px;
+  grid-gap: 50px;
+  h1 {
+    padding: 20px;
+  }
+`;
 export default FlightDetail;

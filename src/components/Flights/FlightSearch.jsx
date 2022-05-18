@@ -7,20 +7,20 @@ const initialValues = {
   from: "",
   to: "",
   passangers: "",
+  date: "",
 };
 
 const FlightSearch = ({ handleFilterFlights }) => {
   const [formFields, setFormFields] = useState(initialValues);
-  const { from, to, passangers } = formFields;
+  const { from, to, passangers, date } = formFields;
   const [errorMesage, setErrorMessage] = useState("");
   const handleFromChange = (event) => {
     const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
-
   const handleFormValidation = () => {
-    if (!from || !to || !passangers) {
-      setErrorMessage("Please enter flight choice");
+    if (!from || !to || !passangers || !date) {
+      setErrorMessage("Please enter flight details");
       return false;
     }
     if (from === to) {
@@ -53,6 +53,15 @@ const FlightSearch = ({ handleFilterFlights }) => {
         handleFromChange={handleFromChange}
         options={COUNTRY_CHOICES}
       />
+      <DatePicker>
+        <label>Travel date</label>
+        <input
+          type="date"
+          name="date"
+          onChange={handleFromChange}
+          value={date}
+        />
+      </DatePicker>
       <SelectField
         name="passangers"
         value={passangers}
@@ -69,11 +78,10 @@ const Container = styled.div`
   background-color: var(--white);
   border-radius: 30px;
   padding: 20px;
-  max-height: 55vh;
 `;
 const ErrorMessage = styled.p`
   text-align: center;
-  color: red;
+  color: var(--redBerry);
   font-size: 12px;
   padding-bottom: 5px;
 `;
@@ -81,7 +89,7 @@ const ErrorMessage = styled.p`
 const Button = styled.button`
   cursor: pointer;
   text-align: center;
-  background-color: #95d2e9;
+  background-color: var(--jaggedIce);
   border-radius: 30px;
   padding: 10px 20px;
   width: 200px;
@@ -90,5 +98,20 @@ const Button = styled.button`
   border: none;
   color: var(--white);
 `;
-
+const DatePicker = styled.div`
+  label {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  input {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    border: 1px solid #0000003b;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 2px;
+  }
+`;
 export default FlightSearch;

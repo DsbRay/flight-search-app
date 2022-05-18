@@ -20,6 +20,6 @@ const Container = styled.div`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 50px);
 `;
 export default Home;
