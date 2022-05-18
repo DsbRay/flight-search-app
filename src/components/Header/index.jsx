@@ -18,6 +18,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 0 5%;
+  background-color: var(--white);
   .logo {
     display: flex;
     align-items: center;

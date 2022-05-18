@@ -11,8 +11,12 @@ const Flights = () => {
   };
   return (
     <Container>
-      <FlightSearch handleFilterFlights={handleFilterFlights} />
       <div>
+        <h1 className="section-title">Search Flights</h1>
+        <FlightSearch handleFilterFlights={handleFilterFlights} />
+      </div>
+      <div>
+        <h1 className="section-title">Flight List</h1>
         <FlightList filters={filters} />
       </div>
     </Container>
@@ -21,9 +25,10 @@ const Flights = () => {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
-  background-color: #c0c0c0;
   padding: 20px;
   grid-gap: 20px;
-  min-height: calc(100vh - 100px);
+  .section-title {
+    padding: 20px;
+  }
 `;
 export default Flights;

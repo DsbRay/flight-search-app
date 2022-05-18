@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import FlightItem from "./FlightItem";
 import { FLIGHT_DATA } from "../../data";
-const FlightList = ({ filters }) => {
-  const { to = "", from = "", passangers = 0 } = filters;
 
+const FlightList = ({ filters }) => {
+  const { to, from, passangers, date } = filters;
   const filterFlights = () => {
     return FLIGHT_DATA.filter((flight) => {
-      if (to && from && passangers) {
+      if (to && from && passangers && date) {
         return (
           flight.to === to &&
           flight.from === from &&
-          flight.seatsAvailable >= passangers
+          flight.seatsAvailable >= passangers &&
+          flight.departureDate === date
         );
       } else {
         return FLIGHT_DATA;
@@ -20,8 +21,12 @@ const FlightList = ({ filters }) => {
 
   const renderFlightOptions = () => {
     const filteredList = filterFlights();
+    if (filteredList.length === 0)
+      return <p className="no-flights">No Flights available</p>;
     return filteredList.map((flight) => {
-      return <FlightItem key={flight.id} flight={flight} />;
+      return (
+        <FlightItem key={flight.id} flight={flight} passangers={passangers} />
+      );
     });
   };
 
@@ -44,7 +49,11 @@ const Container = styled.div`
   .labels {
     padding: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
+  }
+  .no-flights {
+    text-align: center;
+    padding: 20px;
   }
 `;
 export default FlightList;

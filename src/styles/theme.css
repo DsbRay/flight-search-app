@@ -2,6 +2,12 @@
     /* base colours */
     --black: #000;
     --white: #fff;
-    --gray: #8f8f8f;
+    --gray: #e5e5e5;
     /* primary colours */
+    --redBerry: #8a0101;
+    --jaggedIce: #87cbe4;
+}
+
+body {
+    background-color: var(--gray);
 }

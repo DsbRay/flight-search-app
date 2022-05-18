@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./routes/Navigation";
-import { Home, Flights, FlightDetail } from "./components";
+import { Home, Flights, FlightDetail, Ticket } from "./components";
 
 const App = () => {
   return (
@@ -9,6 +9,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/flights" element={<Flights />} />
         <Route path="/flights/:id" element={<FlightDetail />} />
+        <Route path="/flight-ticket" element={<Ticket />} />
       </Route>
     </Routes>
   );

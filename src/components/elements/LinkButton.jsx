@@ -10,13 +10,17 @@ const LinkButton = ({ className = "", url, text }) => {
 };
 
 const Button = styled(Link)`
-  background-color: #8a0101;
+  background-color: var(--jaggedIce);
   padding: 20px 50px;
   border: none;
   color: var(--white);
   border-radius: 30px;
   transition: opacity 0.2s ease;
+  &.default {
+    padding: 10px 20px;
+  }
   &.check-flights {
+    background-color: var(--redBerry);
     position: absolute;
     top: 50%;
     left: 50%;
